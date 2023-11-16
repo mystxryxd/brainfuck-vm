@@ -33,17 +33,13 @@ impl Interpreter {
             Ast::INCVAL => self.memory[self.mp] += 1,
             Ast::DECVAL => self.memory[self.mp] -= 1,
             Ast::BRANCH { inner } => {
-                println!("{:?}", inner);
-
                 while self.memory[self.mp] != 0 {
                     for inst in inner {
                         self.run_instruction(inst);
                     };
                 }
-
-                self.curr_index += inner.len();
             },
-            Ast::WRITE => {println!("Printing {}", self.memory[self.mp] as char)},
+            Ast::WRITE => print!("{}", self.memory[self.mp] as char),
             _ => todo!()
         }
     }
