@@ -8,6 +8,6 @@ brainfuck interpreter/compiler/virtual machine/idk wtf its called
 cargo run "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++." --prints Hello, World!
 ```
 
-## can i ~~steal~~borrow ur code uwu?
+## can i ~~steal~~ borrow ur code uwu?
 
 fuck yea go for it 👍
