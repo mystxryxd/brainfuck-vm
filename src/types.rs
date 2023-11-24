@@ -18,7 +18,7 @@ pub enum Ast {
     DECVAL,
     READ,
     WRITE,
-    BRANCH {inner: Vec<Ast>}
+    BRANCH { inner: Vec<Ast> },
 }
 
 #[derive(Copy, Clone, Debug)]

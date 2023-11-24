@@ -1,9 +1,9 @@
 use std::env;
 
-mod lexer;
-mod types;
-mod parser;
 mod interpreter;
+mod lexer;
+mod parser;
+mod types;
 
 fn main() {
     let code: String = env::args().nth(1).expect("Are you retarded?");

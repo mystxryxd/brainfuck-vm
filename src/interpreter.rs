@@ -1,6 +1,6 @@
-use crate::types::{Token, Ast};
 use crate::lexer::Lexer;
 use crate::parser::Parser;
+use crate::types::{Ast, Token};
 
 pub struct Interpreter {
     code: String,
@@ -11,7 +11,12 @@ pub struct Interpreter {
 
 impl Interpreter {
     pub fn new(code: String) -> Self {
-        Self {code, memory: [0; 3000], mp: 0, curr_index: 0}
+        Self {
+            code,
+            memory: [0; 3000],
+            mp: 0,
+            curr_index: 0,
+        }
     }
 
     fn tokenize(&mut self) -> Vec<Token> {
@@ -22,7 +27,7 @@ impl Interpreter {
 
     fn compile_ast(&mut self, tokens: Vec<Token>) -> Vec<Ast> {
         let mut parser: Parser = Parser::new(tokens);
-        
+
         parser.parse()
     }
 
@@ -36,18 +41,18 @@ impl Interpreter {
                 while self.memory[self.mp] != 0 {
                     for inst in inner {
                         self.run_instruction(inst);
-                    };
+                    }
                 }
-            },
+            }
             Ast::WRITE => print!("{}", self.memory[self.mp] as char),
-            _ => todo!()
+            _ => todo!(),
         }
     }
 
     pub fn run(&mut self) {
         let tokens: Vec<Token> = self.tokenize();
         let ast: Vec<Ast> = self.compile_ast(tokens);
-        
+
         while self.curr_index < ast.len() {
             self.run_instruction(&ast[self.curr_index]);
 

@@ -7,13 +7,20 @@ pub struct Parser {
 
 impl Parser {
     pub fn new(tokens: Vec<Token>) -> Self {
-        Self {tokens, curr_index: 0}
+        Self {
+            tokens,
+            curr_index: 0,
+        }
     }
 
     fn parse_branch(&mut self) -> Ast {
         let mut inner_scope: Vec<Ast> = Vec::new();
 
-        while self.tokens.get(self.curr_index + 1).is_some_and(|token: &Token| token.token_type != TokenType::RBRACKET) {
+        while self
+            .tokens
+            .get(self.curr_index + 1)
+            .is_some_and(|token: &Token| token.token_type != TokenType::RBRACKET)
+        {
             self.curr_index += 1;
 
             inner_scope.push(self.parse_next());
@@ -24,7 +31,7 @@ impl Parser {
         Ast::BRANCH { inner: inner_scope }
     }
 
-    fn parse_token(&mut self, token: Token) -> Ast {        
+    fn parse_token(&mut self, token: Token) -> Ast {
         match token.token_type {
             TokenType::PLUS => Ast::INCVAL,
             TokenType::MINUS => Ast::DECVAL,
@@ -41,7 +48,7 @@ impl Parser {
 
         match token.token_type {
             TokenType::LBRACKET => self.parse_branch(),
-            _ => self.parse_token(token)
+            _ => self.parse_token(token),
         }
     }
 
@@ -52,7 +59,7 @@ impl Parser {
             instructions.push(self.parse_next());
 
             self.curr_index += 1;
-        };
+        }
 
         instructions
     }
